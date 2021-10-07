@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sival-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sival-l5e5
+  template:
+    metadata:
+      labels:
+        app: sival-l5e5
+    spec:
+      containers:
+      - name: sival-l5e5
+        image: muggel/lab2exercise2:latest
+        ports:
+        - containerPort: 8000  
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: sival-web
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 32326
+  selector:
+    app: sival-l5e5
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sival-sql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sival-l5e4
+  template:
+    metadata:
+      labels:
+        app: sival-l5e4
+    spec:
+      containers:
+      - name: sival-l5e4
+        image: muggel/lab2exercise4:latest
+        command: [--default-authentication-plugin=mysql_native_password]
+        env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: “yes”
+        ports:
+        - containerPort: 3036
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sival-sql
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 3036
+    nodePort: 32330
+  selector:
+    app: sival-l5e4
+---
+

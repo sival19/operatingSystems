@@ -1,0 +1,5 @@
+docker run -it --cpus="1" fib35 
+ docker tag SOURCEIMG NEWNAME      
+docker build -t IMAGETAG . 
+
+docker run -m="6m" --memory-swap="1g" l06e03 

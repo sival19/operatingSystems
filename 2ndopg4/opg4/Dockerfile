@@ -1,0 +1,5 @@
+FROM mysql
+ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
+COPY /L2E4/init.sql /docker-entrypoint-initdb.d/.
+
+RUN bash
