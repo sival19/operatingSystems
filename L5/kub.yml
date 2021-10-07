@@ -30,5 +30,36 @@ spec:
     nodePort: 32329
   selector:
     app: sival-web1
-
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sival-sqltest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sival-sql1
+  template:
+    metadata:
+      labels:
+        app: sival-sql1
+    spec:
+      containers:
+      - name: sival-sql1
+        image: ahmadhamid/l2e4:latest
+        ports:
+        - containerPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+spec:
+  type: NodePort
+  ports:
+  - port: 3306
+    targetPort: 3306
+    nodePort: 32329
+  selector:
+    app: sival-sql1
