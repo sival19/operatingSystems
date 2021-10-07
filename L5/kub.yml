@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sival-webtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sival-web1
+  template:
+    metadata:
+      labels:
+        app: sival-web1
+    spec:
+      containers:
+      - name: sival-web1
+        image: ahmadhamid/l2e2:latest
+        ports:
+        - containerPort: 80
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: sival-service1
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 32329
+  selector:
+    app: sival-web1
+
+
