@@ -1,0 +1,9 @@
+fio-rand
+block size = 4096b=0,004096 mb
+avg ops = 12786.09
+speed = 52.38411264 mb/s
+
+fio-seq
+avg ops=15230.62
+block size = 4096b=0,004096 mb
+speed = 62.38461952 mb/s

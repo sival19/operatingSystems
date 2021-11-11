@@ -1,0 +1,11 @@
+Read speed calculation formula: IOPS*Block size = speed (MiB/s)
+
+fio-seq-read.fio file:
+	avg iops: avg=13413.68
+	block size: 0.256 MiB
+	read speed: 13413.68*0.256 = 3422.9 MiB/s
+	
+fio-rand-read.fio file:
+	avg iops: avg=4317.74
+	block size: 0.004 MiB
+	read speed: 4317.74*0.004 = 17.27 MiB/s
